@@ -52,6 +52,7 @@
     <Compile Include="DataContext.cs" />
     <Compile Include="Entities\Choices.cs" />
     <Compile Include="Entities\Questions.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="Repositories\EfGenericRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
     <Compile Include="IObjectWithState.cs" />
