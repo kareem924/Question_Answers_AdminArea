@@ -1,0 +1,10 @@
+C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\DataAccess\bin\Debug\DataAccess.dll.config
+C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\DataAccess\bin\Debug\DataAccess.dll
+C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\DataAccess\bin\Debug\DataAccess.pdb
+C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\DataAccess\bin\Debug\EntityFramework.dll
+C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\DataAccess\bin\Debug\EntityFramework.xml
+C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
+C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\DataAccess\obj\Debug\DataAccess.dll
+C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\DataAccess\obj\Debug\DataAccess.pdb

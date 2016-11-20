@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using DataAccess;
 using DataAccess.UnitOfWork;
+using PagedList;
 using WebAdmin.ViewModels;
 
 namespace WebAdmin.Controllers
@@ -20,9 +21,14 @@ namespace WebAdmin.Controllers
             _uow = new UnitOfWork();
         }
         // GET: Questions
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(_uow.Questions.List());
+            var questuinList = _uow.Questions.List().OrderBy(x=>x.QuestionID);
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            var onePageOfQuestion = questuinList.ToPagedList(pageNumber, pageSize);
+            ViewBag.OnePageOfQuestion = onePageOfQuestion;
+            return View();
         }
 
 

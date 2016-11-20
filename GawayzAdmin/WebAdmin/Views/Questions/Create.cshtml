@@ -1,7 +1,23 @@
-﻿
+﻿@model WebAdmin.ViewModels.QuestionsViewModel
+@using System.Web.Script.Serialization
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Question";
 }
 
-<h2>Create</h2>
+@{ string data = new JavaScriptSerializer().Serialize(Model);}
+
+@section scripts{
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery-validate.bootstrap-tooltip.js"></script>
+    <script src="~/Scripts/QuestionViewModel.js"></script>
+    <script type="text/javascript">
+        var QuestionViewModel = new QuestionViewModel(@Html.Raw(data));
+        ko.applyBindings(QuestionViewModel);
+    </script>
+}
+@{ Html.RenderPartial("_CreateOrEdit");}
+
+
 

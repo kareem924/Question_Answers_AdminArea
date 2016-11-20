@@ -1,7 +1,39 @@
-﻿
+﻿@using PagedList
+@using PagedList.Mvc
+@model IEnumerable<DataAccess.Entities.Questions>
 @{
     ViewBag.Title = "Index";
 }
+<div id="questionTable">
+    <h2>Index</h2>
 
-<h2>Index</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+    </p>
+    <table class="table" >
+        <tr>
+            <th>
+                <strong> Question</strong>
+            </th>
 
+            <th>Action</th>
+        </tr>
+
+        @foreach (var item in ViewBag.OnePageOfQuestion)
+        {
+            <tr>
+                <td>
+                    @item.QuestionText
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = @item.QuestionID }, new { @class = "btn btn-info btn-xs" }) |
+                    @Html.ActionLink("Details", "Details", new { id = @item.QuestionID }, new { @class = "btn btn-primary btn-xs" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = @item.QuestionID }, new { @class = "btn btn-danger btn-xs" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    @Html.PagedListPager((IPagedList)ViewBag.OnePageOfQuestion, page => Url.Action("Index", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "questionTable" }))
+</div>
