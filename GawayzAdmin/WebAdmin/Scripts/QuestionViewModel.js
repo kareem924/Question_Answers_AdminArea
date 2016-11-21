@@ -81,5 +81,28 @@ QuestionViewModel = function (data) {
 $("form").validate({
     submitHandler: function () {
         QuestionViewModel.save();
+    },
+
+    rules: {
+        QuestionText: {
+            required: true
+          
+        }
+        
+    },
+
+    messages: {
+        QuestionText: {
+            required: "You cannot create a Question unless you supply the customer's name.",
+           
+        }
+        
+    },
+
+    tooltip_options: {
+        QuestionText: {
+            placement: 'right'
+        }
     }
 });
+
