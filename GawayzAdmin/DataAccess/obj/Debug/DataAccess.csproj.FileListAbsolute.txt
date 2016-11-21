@@ -8,3 +8,12 @@ C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\DataAccess\b
 C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
 C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\DataAccess\obj\Debug\DataAccess.dll
 C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\DataAccess\obj\Debug\DataAccess.pdb
+F:\New folder\Question_Answers_AdminArea\GawayzAdmin\DataAccess\bin\Debug\DataAccess.dll.config
+F:\New folder\Question_Answers_AdminArea\GawayzAdmin\DataAccess\bin\Debug\DataAccess.dll
+F:\New folder\Question_Answers_AdminArea\GawayzAdmin\DataAccess\bin\Debug\DataAccess.pdb
+F:\New folder\Question_Answers_AdminArea\GawayzAdmin\DataAccess\bin\Debug\EntityFramework.dll
+F:\New folder\Question_Answers_AdminArea\GawayzAdmin\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+F:\New folder\Question_Answers_AdminArea\GawayzAdmin\DataAccess\bin\Debug\EntityFramework.xml
+F:\New folder\Question_Answers_AdminArea\GawayzAdmin\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+F:\New folder\Question_Answers_AdminArea\GawayzAdmin\DataAccess\obj\Debug\DataAccess.dll
+F:\New folder\Question_Answers_AdminArea\GawayzAdmin\DataAccess\obj\Debug\DataAccess.pdb

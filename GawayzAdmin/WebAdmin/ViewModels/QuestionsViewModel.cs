@@ -7,7 +7,7 @@ namespace WebAdmin.ViewModels
     {
         public QuestionsViewModel()
         {
-            ChoicesViewModel = new List<ChoicesViewModel>();
+            ChoicesItems = new List<ChoicesViewModel>();
             ChoicesToDelete = new List<int>();
         }
         
@@ -20,7 +20,7 @@ namespace WebAdmin.ViewModels
         public string QuestionText { get; set; }
         public int GroupNo { get; set; }
         public List<int> ChoicesToDelete { get; set; }
-        public List<ChoicesViewModel> ChoicesViewModel { get; set; }
+        public List<ChoicesViewModel> ChoicesItems { get; set; }
 
         public byte[] RowVersion { get; set; }
         public string MessageToClient { get; set; }

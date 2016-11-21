@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Web;
 using DataAccess;
@@ -14,6 +15,7 @@ namespace WebAdmin.ViewModels
         public int ProductId { get; set; }
         public string ChoiceLetter { get; set; }
         public string ChoiceText { get; set; }
+        public bool IsSelected { get; set; }
         public QuestionsViewModel Questions { get; set; }
         public byte[] RowVersion { get; set; }
       

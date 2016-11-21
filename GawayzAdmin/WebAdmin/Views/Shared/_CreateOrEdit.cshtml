@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-lg-12">
 
-            <label class="control-label" for="CustomerName">Question Text:</label>
-            <input class="form-control" name="CustomerName" data-bind="value: CustomerName, event: {change: flagSalesOrderAsEdited}" />
+            <label class="control-label" for="QuestionText">Question Text:</label>
+            <input class="form-control" name="QuestionText" data-bind="value: QuestionText, event: {change: flagQuestionAsEdited}" />
 
         </div>
     </div>
@@ -23,8 +23,8 @@
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <label class="control-label" for="PONumber">Group No.:</label>
-                <input class="form-control" name="PONumber" data-bind="value: PONumber, event: {change: flagSalesOrderAsEdited}" />
+                <label class="control-label" for="GroupNo">Group No.:</label>
+                <input class="form-control" name="GroupNo" data-bind="value: GroupNo, event: {change: flagQuestionAsEdited}" />
             </div>
         </div>
     </div>
@@ -34,18 +34,18 @@
             <th class="text-left">Choice Text</th>
             <th class="text-left">Choice Letter</th>
             <th class="text-left">Correct Choice</th>
-            <th><button class="btn btn-info btn-xs" data-bind="click: addSalesOrderItem">Add</button></th>
+            <th><button class="btn btn-info btn-xs" data-bind="click: addChoice">Add</button></th>
         </tr>
-        <tbody data-bind="foreach: SalesOrderItems">
+        <tbody data-bind="foreach: ChoicesItems">
             <tr>
-                <td class="form-group"><input name="ProductCode" class="form-control input-sm" data-bind="attr: {'id': 'ProductCode_' + $index()}, value: ProductCode, event: {change: flagSalesOrderItemAsEdited}, hasfocus: true" /></td>
-                <td class="form-group"><input name="Quantity" class="form-control input-sm text-right" data-bind="attr: {'id': 'Quantity_' + $index()}, value: Quantity, event: {change: flagSalesOrderItemAsEdited}" /></td>
+                <td class="form-group"><input name="ChoiceText" class="form-control input-sm" data-bind="attr: {'ChoiceId': 'ChoiceText_' + $index()}, value: ChoiceText, event: {change: flagChoicesAsEdited}, hasfocus: true" /></td>
+                <td class="form-group"><input name="ChoiceLetter" class="form-control input-sm text-right" data-bind="attr: {'ChoiceId': 'ChoiceLetter_' + $index()}, value: ChoiceLetter, event: {change: flagChoicesAsEdited}" /></td>
                 <td>
                     <div class="checkbox">
-                        <label><input type="checkbox" value=""></label>
+                        <input type="checkbox" data-bind="attr: {'ChoiceId': 'IsSelected_' + $index()},  checked:IsSelected" />
                     </div>
                 </td>
-                <td class="form-group"><button class="btn btn-danger btn-xs" data-bind="click: $parent.deleteSalesOrderItem">Delete</button></td>
+                <td class="form-group"><button class="btn btn-danger btn-xs" data-bind="click: $parent.deleteChoiceItem">Delete</button></td>
             </tr>
         </tbody>
 

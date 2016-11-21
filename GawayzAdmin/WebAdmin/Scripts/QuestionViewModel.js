@@ -6,18 +6,16 @@
 };
 
 
-var salesOrderItemMapping = {
-    'SalesOrderItems': {
-        key: function (salesOrderItem) {
-            return ko.utils.unwrapObservable(salesOrderItem.SalesOrderItemId);
+var ChoicesMapping = {
+    'ChoicesItems': {
+        key: function (choiceItem) {
+            return ko.utils.unwrapObservable(choiceItem.ChoiceId);
         },
         create: function (options) {
-            return new SalesOrderItemViewModel(options.data);
+            return new ChoicesViewModel(options.data);
         }
     }
 };
-
-
 var dataConverter = function (key, value) {
     if (key === 'RowVersion' && Array.isArray(value)) {
         var str = String.fromCharCode.apply(null, value);
@@ -27,72 +25,61 @@ var dataConverter = function (key, value) {
     return value;
 };
 
-
-SalesOrderItemViewModel = function (data) {
+ChoicesViewModel = function (data) {
     var self = this;
-    ko.mapping.fromJS(data, salesOrderItemMapping, self);
-
-    self.flagSalesOrderItemAsEdited = function () {
+    ko.mapping.fromJS(data, ChoicesMapping, self);
+    self.flagChoicesAsEdited = function () {
         if (self.ObjectState() != ObjectState.Added) {
             self.ObjectState(ObjectState.Modified);
         }
 
         return true;
-    },
-
-    self.ExtendedPrice = ko.computed(function () {
-        return (self.Quantity() * self.UnitPrice()).toFixed(2);
-    });
+    }
+   
 };
 
 
-SalesOrderViewModel = function (data) {
+QuestionViewModel = function (data) {
     var self = this;
-    ko.mapping.fromJS(data, salesOrderItemMapping, self);
+    ko.mapping.fromJS(data, ChoicesMapping, self);
 
     self.save = function () {
         $.ajax({
-            url: "/Sales/Save/",
+            url: "/Questions/Save/",
             type: "POST",
-            data: ko.toJSON(self, dataConverter),
+            data: ko.toJSON(self),
             contentType: "application/json",
             success: function (data) {
-                if (data.salesOrderViewModel != null)
-                    ko.mapping.fromJS(data.salesOrderViewModel, {}, self);
+                if (data.QuestionViewModel != null)
+                    ko.mapping.fromJS(data.QuestionViewModel, {}, self);
 
                 if (data.newLocation != null)
                     window.location = data.newLocation;
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                if (XMLHttpRequest.status == 400) {
-                    $('#MessageToClient').text(XMLHttpRequest.responseText);
-                }
-                else {
-                    $('#MessageToClient').text('The web server had an error.');
-                }
             }
         });
     },
 
-    self.flagSalesOrderAsEdited = function () {
+    self.flagQuestionAsEdited = function () {
         if (self.ObjectState() != ObjectState.Added) {
             self.ObjectState(ObjectState.Modified);
         }
-
         return true;
     },
 
-    self.addChioces = function () {
-        var salesOrderItem = new SalesOrderItemViewModel({ SalesOrderItemId: 0, ProductCode: "", Quantity: 1, UnitPrice: 0, ObjectState: ObjectState.Added });
-        self.SalesOrderItems.push(salesOrderItem);
-    },
+     
+    
+    self.addChoice = function () {
+        var choiceItem = new ChoicesViewModel({ ChoiceId: 0, ChoiceText: "", ChoiceLetter: "", IsSelected: false, ObjectState: ObjectState.Added });
+        self.ChoicesItems.push(choiceItem);
+    }, self.deleteChoiceItem = function (choice) {
+        self.ChoicesItems.remove(this);
 
-   
-
-    self.deleteSalesOrderItem = function (salesOrderItem) {
-        self.SalesOrderItems.remove(this);
-
-        if (salesOrderItem.SalesOrderItemId() > 0 && self.SalesOrderItemsToDelete.indexOf(salesOrderItem.SalesOrderItemId()) == -1)
-            self.SalesOrderItemsToDelete.push(salesOrderItem.SalesOrderItemId());
+        if (choice.ChoiceId() > 0 && self.ChoicesToDelete.indexOf(choice.ChoiceId()) == -1)
+            self.ChoicesToDelete.push(choice.ChoiceId());
     };
 };
+$("form").validate({
+    submitHandler: function () {
+        QuestionViewModel.save();
+    }
+});

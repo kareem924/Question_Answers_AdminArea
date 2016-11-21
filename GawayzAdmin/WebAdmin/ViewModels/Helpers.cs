@@ -36,7 +36,7 @@ namespace WebAdmin.ViewModels
                     ChoiceLetter = choice.ChoiceLetter,
                     ChoiceText = choice.ChoiceText
                 };
-                questionsViewModel.ChoicesViewModel.Add(choicesViewModel);
+                questionsViewModel.ChoicesItems.Add(choicesViewModel);
             }
 
             return questionsViewModel;
@@ -58,7 +58,7 @@ namespace WebAdmin.ViewModels
 
             };
             int temporarySalesOrderItemId = -1;
-            foreach (ChoicesViewModel choiceViewModel in questionsViewModel.ChoicesViewModel)
+            foreach (ChoicesViewModel choiceViewModel in questionsViewModel.ChoicesItems)
             {
                 Choices choices = new Choices();
 

@@ -108,7 +108,7 @@ namespace WebAdmin.Controllers
 
             if (question.ObjectState == ObjectState.Deleted)
             {
-                foreach (var choiceItem in questionsViewModel.ChoicesViewModel)
+                foreach (var choiceItem in questionsViewModel.ChoicesItems)
                 {
                     var choice = _uow.Choices.Find(choiceItem.ChoiceId);
                     if (choice != null)
