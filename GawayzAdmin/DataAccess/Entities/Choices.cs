@@ -19,7 +19,7 @@ namespace DataAccess.Entities
         public string ChoiceLetter { get; set; }
         public string ChoiceText { get; set; }
         public Questions SalesOrder { get; set; }
-        public byte[] RowVersion { get; set; }
+       
         [NotMapped]
         public ObjectState ObjectState { get; set; }
     }

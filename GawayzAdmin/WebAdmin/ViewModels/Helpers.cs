@@ -17,7 +17,7 @@ namespace WebAdmin.ViewModels
                 AnswerId = questions.AnswerID,
                 AnswerLetter = questions.AnswerLetter,
                 ObjectState = ObjectState.Unchanged,
-                RowVersion = questions.RowVersion,
+               
                 ProductId = questions.ProductID,
                 QuestionText = questions.QuestionText,
                 GroupNo = questions.GroupNo,
@@ -32,7 +32,7 @@ namespace WebAdmin.ViewModels
                     ChoiceTypeId = choice.ChoiceTypeID,
                     ProductId = choice.ProductID,
                     ObjectState = ObjectState.Unchanged,
-                    RowVersion = choice.RowVersion,
+                   
                     ChoiceLetter = choice.ChoiceLetter,
                     ChoiceText = choice.ChoiceText
                 };
@@ -50,8 +50,8 @@ namespace WebAdmin.ViewModels
                 AnswerID = questionsViewModel.AnswerId,
                 AnswerLetter = questionsViewModel.AnswerLetter,
                 ObjectState = questionsViewModel.ObjectState,
-                RowVersion = questionsViewModel.RowVersion,
-                ProductID = questionsViewModel.ProductId,
+             
+                ProductID = 2,
                 QuestionText = questionsViewModel.QuestionText,
                 GroupNo = questionsViewModel.GroupNo,
                 QuestionTypeID = questionsViewModel.QuestionTypeId
@@ -69,7 +69,7 @@ namespace WebAdmin.ViewModels
                 choices.ChoiceLetter = choiceViewModel.ChoiceLetter;
                 choices.ChoiceText = choiceViewModel.ChoiceText;
                 choices.ObjectState = choiceViewModel.ObjectState;
-                choices.RowVersion = choiceViewModel.RowVersion;
+              
                 if (choiceViewModel.ObjectState != ObjectState.Added)
                     choices.ChoiceID = choiceViewModel.ChoiceId;
                 else

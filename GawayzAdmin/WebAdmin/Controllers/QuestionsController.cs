@@ -15,7 +15,7 @@ namespace WebAdmin.Controllers
     public class QuestionsController : Controller
     {
         IUnitOfWork _uow;
-        // GET: /Departments/
+  
         public QuestionsController()
         {
             _uow = new UnitOfWork();
@@ -23,7 +23,7 @@ namespace WebAdmin.Controllers
         // GET: Questions
         public ActionResult Index(int? page)
         {
-            var questuinList = _uow.Questions.List().OrderBy(x=>x.QuestionID);
+            var questuinList = _uow.Questions.List().OrderBy(x => x.QuestionID);
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             var onePageOfQuestion = questuinList.ToPagedList(pageNumber, pageSize);
@@ -103,9 +103,12 @@ namespace WebAdmin.Controllers
             }
 
             var question = ViewModels.Helpers.CreateQuestionsFromQuestionsViewModel(questionsViewModel);
-
-            _uow.Questions.Add(question);
-
+            if (question.ObjectState == ObjectState.Added)
+            { _uow.Questions.Add(question); }
+            else
+            {
+                _uow.Questions.Edit(question.QuestionID, question);
+            }
             if (question.ObjectState == ObjectState.Deleted)
             {
                 foreach (var choiceItem in questionsViewModel.ChoicesItems)

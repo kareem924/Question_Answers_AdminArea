@@ -87,20 +87,37 @@ $("form").validate({
         QuestionText: {
             required: true
           
+        },
+        ChoiceText: {
+            required: true
+        },
+        ChoiceLetter: {
+            required: true
         }
         
     },
 
     messages: {
         QuestionText: {
-            required: "You cannot create a Question unless you supply the customer's name.",
-           
+            required: "You cannot create a Question unless you supply the Question Text.",
+        },
+        ChoiceText: {
+            required: "Choice text is Required."
+        },
+        ChoiceLetter: {
+            required: "Choice Letter is Required."
         }
         
     },
 
     tooltip_options: {
         QuestionText: {
+            placement: 'right'
+        },
+        ChoiceText: {
+            placement: 'right'
+        },
+        ChoiceLetter: {
             placement: 'right'
         }
     }

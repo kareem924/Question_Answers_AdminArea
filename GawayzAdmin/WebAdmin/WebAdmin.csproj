@@ -309,6 +309,7 @@
     <Content Include="Views\Questions\Edit.cshtml" />
     <Content Include="Views\Questions\Delete.cshtml" />
     <Content Include="Views\Shared\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Shared\_DisplayQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
