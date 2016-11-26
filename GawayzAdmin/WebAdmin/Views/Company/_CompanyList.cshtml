@@ -1,0 +1,133 @@
+﻿@{
+    Layout = null;
+}
+@using PagedList
+@using PagedList.Mvc
+@model IEnumerable<DataAccess.Entities.Questions>
+<div id="companyTable">
+    <div class="content-box-large">
+        <div class="panel-heading">
+            <div class="panel-title"><h2>Companies</h2></div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            <strong> Company Name</strong>
+                        </th>
+                        <th>
+                            <strong> Company Profile</strong>
+                        </th>
+                        <th>
+                            <strong>Active</strong>
+                        </th>
+                        <th>Action</th>
+                    </tr>
+
+                    @foreach (var item in ViewBag.OnePageOfcompany)
+                    {
+                        <tr>
+                            <td>
+                                @item.CompanyName
+                            </td>
+                            <td>
+                                @item.CompanyProfile
+                            </td>
+                            <td>
+                                @if (item.Active == true)
+                                {
+                                    <span class="label label-success">Active</span>
+
+                                }
+                                else
+                                {
+                                    <span class="label label-danger">Inactive</span>
+
+                                }
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = @item.CompanyID }, new { @class = "btn btn-warning btn-xs", data_modal = "" }) |
+                               
+                              
+                             
+                                @Html.ActionLink("procuts", "Index", "Product", new { id = @item.CompanyID }, new { @class = "btn btn-primary btn-xs" })
+                               
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfcompany, page => Url.Action("CompanyList", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "questionTable" }))
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+        $.ajaxSetup({ cache: false });
+
+        $("a[data-modal]").on("click", function (e) {
+            // hide dropdown if any (this is used wehen invoking modal from link in bootstrap dropdown )
+            //$(e.target).closest('.btn-group').children('.dropdown-toggle').dropdown('toggle');
+
+            $('#myModalContent').load(this.href, function () {
+                $('#myModal').modal({
+                  backdrop: 'static',
+                    keyboard: true
+                }, 'show');
+                bindForm(this);
+            });
+            return false;
+        });
+    });
+
+    function bindForm(dialog) {
+        $('form', dialog).submit(function () {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    if (result.success) {
+
+                        $('#myModal').modal('hide');
+                        $('#companyTable').load(result.url); //  Load data from the server and place the returned HTML into the matched element
+                        $.notify({
+                            // options
+                            icon: 'glyphicon glyphicon-ok',
+                            title: '',
+                            message: 'Your data added Successfuly',
+                        },{
+                            type: "success",
+                          
+                            placement: {
+                                from: "bottom ",
+                                align: "right"
+                            }});
+                    } else {
+                        $('#myModalContent').html(result);
+                        bindForm(dialog);
+                        $.notify({
+                            // options
+                            icon: 'glyphicon glyphicon-warnning',
+                            title: '',
+                            message: result.message,
+                        }, {
+                            type: "danger",
+
+                            placement: {
+                                from: "bottom ",
+                                align: "right"
+                            }
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+    }
+</script>

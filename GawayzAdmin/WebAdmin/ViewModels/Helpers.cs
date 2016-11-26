@@ -17,7 +17,7 @@ namespace WebAdmin.ViewModels
                 AnswerId = questions.AnswerID,
                 AnswerLetter = questions.AnswerLetter,
                 ObjectState = ObjectState.Unchanged,
-               
+
                 ProductId = questions.ProductID,
                 QuestionText = questions.QuestionText,
                 GroupNo = questions.GroupNo,
@@ -32,7 +32,7 @@ namespace WebAdmin.ViewModels
                     ChoiceTypeId = choice.ChoiceTypeID,
                     ProductId = choice.ProductID,
                     ObjectState = ObjectState.Unchanged,
-                   
+
                     ChoiceLetter = choice.ChoiceLetter,
                     ChoiceText = choice.ChoiceText
                 };
@@ -50,7 +50,7 @@ namespace WebAdmin.ViewModels
                 AnswerID = questionsViewModel.AnswerId,
                 AnswerLetter = questionsViewModel.AnswerLetter,
                 ObjectState = questionsViewModel.ObjectState,
-             
+
                 ProductID = 2,
                 QuestionText = questionsViewModel.QuestionText,
                 GroupNo = questionsViewModel.GroupNo,
@@ -69,7 +69,7 @@ namespace WebAdmin.ViewModels
                 choices.ChoiceLetter = choiceViewModel.ChoiceLetter;
                 choices.ChoiceText = choiceViewModel.ChoiceText;
                 choices.ObjectState = choiceViewModel.ObjectState;
-              
+
                 if (choiceViewModel.ObjectState != ObjectState.Added)
                     choices.ChoiceID = choiceViewModel.ChoiceId;
                 else
@@ -82,22 +82,29 @@ namespace WebAdmin.ViewModels
 
             return questions;
         }
-        public static string GetMessageToClient(ObjectState objectState, string customerName)
+
+        public static Companies CreateCompanyFromCompanyViewModel(CompanyViewModel companyViewModel)
         {
-            string messageToClient = string.Empty;
+            var company = new Companies();
 
-            switch (objectState)
-            {
-                case ObjectState.Added:
-                    messageToClient = string.Format("A questiom for {0} has been added to the database.", customerName);
-                    break;
+            company.CompanyID = companyViewModel.CompanyId;
+            company.Active = companyViewModel.Active;
+            company.CompanyName = companyViewModel.CompanyName;
+            company.CompanyProfile = companyViewModel.CompanyProfile;
+           
+                company.RegDate = DateTime.Now;
+                company.ModifiedDate = DateTime.Today;
+            return company;
+        }
 
-                case ObjectState.Modified:
-                    messageToClient = string.Format("The customer name for this sales order has been updated to {0} in the database.", customerName);
-                    break;
-            }
-
-            return messageToClient;
+        public static CompanyViewModel CreateCompanyviewmodelFromCompanies(Companies company)
+        {
+            var companyViewModel =new CompanyViewModel();
+            companyViewModel.CompanyId = company.CompanyID;
+            companyViewModel.Active = company.Active;
+            companyViewModel.CompanyName = company.CompanyName;
+            companyViewModel.CompanyProfile = company.CompanyProfile;
+            return companyViewModel;
         }
     }
 }

@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success", data_modal = ""})
+</p>
+@{Html.RenderAction("CompanyList");}
+
+
+
+

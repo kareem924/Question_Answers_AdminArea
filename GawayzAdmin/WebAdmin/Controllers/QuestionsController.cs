@@ -21,16 +21,21 @@ namespace WebAdmin.Controllers
             _uow = new UnitOfWork();
         }
         // GET: Questions
-        public ActionResult Index(int? page)
+        public ActionResult Index()
+        {
+           
+            return View();
+        }
+
+        public PartialViewResult QuestionsList(int? page)
         {
             var questuinList = _uow.Questions.List().OrderBy(x => x.QuestionID);
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             var onePageOfQuestion = questuinList.ToPagedList(pageNumber, pageSize);
             ViewBag.OnePageOfQuestion = onePageOfQuestion;
-            return View();
+            return PartialView("_QuestionsList");
         }
-
 
         public ActionResult Details(int? id)
         {

@@ -18,7 +18,7 @@ namespace DataAccess.Entities
         public int ProductID { get; set; }
         public string ChoiceLetter { get; set; }
         public string ChoiceText { get; set; }
-        public Questions SalesOrder { get; set; }
+        public Questions Questions { get; set; }
        
         [NotMapped]
         public ObjectState ObjectState { get; set; }

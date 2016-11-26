@@ -204,8 +204,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -216,6 +218,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ChoicesViewModel.cs" />
+    <Compile Include="ViewModels\CompanyViewModel.cs" />
     <Compile Include="ViewModels\HandleModelStateExceptionAttribute.cs" />
     <Compile Include="ViewModels\Helpers.cs" />
     <Compile Include="ViewModels\ModelStateException.cs" />
@@ -226,7 +229,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\buttons.css" />
+    <Content Include="Content\calendar.css" />
+    <Content Include="Content\forms.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\stats.css" />
+    <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -243,8 +251,14 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap-notify.js" />
+    <Content Include="Scripts\bootstrap-notify.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\calendar.js" />
+    <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\editors.js" />
+    <Content Include="Scripts\forms.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -268,6 +282,8 @@
     <Content Include="Scripts\QuestionViewModel.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\stats.js" />
+    <Content Include="Scripts\tables.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -310,9 +326,16 @@
     <Content Include="Views\Questions\Delete.cshtml" />
     <Content Include="Views\Shared\_CreateOrEdit.cshtml" />
     <Content Include="Views\Shared\_DisplayQuestion.cshtml" />
+    <Content Include="Views\Questions\_QuestionsList.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\Company\_CompanyList.cshtml" />
+    <Content Include="Views\Company\_CreateCompany.cshtml" />
+    <Content Include="Views\Company\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Company\_EditCompany.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

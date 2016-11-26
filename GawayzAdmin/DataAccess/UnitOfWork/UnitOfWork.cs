@@ -40,7 +40,33 @@ namespace DataAccess.UnitOfWork
                 return _choices;
             }
         }
-   
+
+        private IGenericRepository<Companies> _company;
+        public IGenericRepository<Companies> Companies
+        {
+            get
+            {
+                if (_company == null)
+                {
+                    return new EfGenericRepository<Companies>(_context);
+                }
+                return _company;
+            }
+        }
+
+        private IGenericRepository<Products> _products;
+        public IGenericRepository<Products> Products
+        {
+            get
+            {
+                if (_products == null)
+                {
+                    return new EfGenericRepository<Products>(_context);
+                }
+                return _products;
+            }
+        }
+
         public void Save()
         {
             _context.SaveChanges();

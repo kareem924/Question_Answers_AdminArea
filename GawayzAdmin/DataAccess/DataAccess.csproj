@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="DataContext.cs" />
     <Compile Include="Entities\Choices.cs" />
+    <Compile Include="Entities\Companies.cs" />
+    <Compile Include="Entities\Products.cs" />
     <Compile Include="Entities\Questions.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Repositories\EfGenericRepository.cs" />
