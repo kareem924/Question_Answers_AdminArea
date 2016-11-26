@@ -21,15 +21,15 @@ namespace WebAdmin.Controllers
             _uow = new UnitOfWork();
         }
         // GET: Questions
-        public ActionResult Index()
+        public ActionResult Index(int productId)
         {
-           
+            ViewBag.productId = productId;
             return View();
         }
 
-        public PartialViewResult QuestionsList(int? page)
+        public PartialViewResult QuestionsList(int? page,int productId)
         {
-            var questuinList = _uow.Questions.List().OrderBy(x => x.QuestionID);
+            var questuinList = _uow.Questions.List().Where(x=>x.ProductID==productId).OrderBy(x => x.QuestionID);
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             var onePageOfQuestion = questuinList.ToPagedList(pageNumber, pageSize);
@@ -53,10 +53,11 @@ namespace WebAdmin.Controllers
         }
 
 
-        public ActionResult Create()
+        public ActionResult Create(int productId)
         {
             var salesOrderViewModel = new QuestionsViewModel();
             salesOrderViewModel.ObjectState = ObjectState.Added;
+            salesOrderViewModel.ProductId = productId;
             return View(salesOrderViewModel);
         }
 

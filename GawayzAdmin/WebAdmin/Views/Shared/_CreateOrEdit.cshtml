@@ -1,6 +1,7 @@
 ﻿<p id="MessageToClient" data-bind="text: MessageToClient"></p>
 
 <form>
+
     <div class="row">
         <div class="col-lg-6">
 
@@ -11,7 +12,7 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label class="control-label" for="GroupNo">Group No.:</label>
-                <input class="form-control" name="GroupNo" data-bind="value: GroupNo, event: {change: flagQuestionAsEdited}" />
+                <input class="form-control" name="GroupNo" data-bind="value: GroupNo, event: {change: flagQuestionAsEdited}"/>
             </div>
         </div>
     </div>
@@ -24,16 +25,16 @@
             <th><button class="btn btn-info btn-xs" data-bind="click: addChoice">Add</button></th>
         </tr>
         <tbody data-bind="foreach: ChoicesItems">
-            <tr>
-                <td class="form-group"><input name="ChoiceText" class="form-control input-sm" data-bind="attr: {'ChoiceId': 'ChoiceText_' + $index()}, value: ChoiceText, event: {change: flagChoicesAsEdited}, hasfocus: true" /></td>
-                <td class="form-group"><input name="ChoiceLetter" class="form-control input-sm text-right" data-bind="attr: {'ChoiceId': 'ChoiceLetter_' + $index()}, value: ChoiceLetter, event: {change: flagChoicesAsEdited}" /></td>
-                <td>
-                    <div class="checkbox">
-                        <input type="checkbox" data-bind="attr: {'ChoiceId': 'IsSelected_' + $index()},  checked:IsSelected" />
-                    </div>
-                </td>
-                <td class="form-group"><button class="btn btn-danger btn-xs" data-bind="click: $parent.deleteChoiceItem">Delete</button></td>
-            </tr>
+        <tr>
+            <td class="form-group"><input name="ChoiceText" class="form-control input-sm" data-bind="attr: {'ChoiceId': 'ChoiceText_' + $index()}, value: ChoiceText, event: {change: flagChoicesAsEdited}, hasfocus: true"/></td>
+            <td class="form-group"><input name="ChoiceLetter" class="form-control input-sm text-right" data-bind="attr: {'ChoiceId': 'ChoiceLetter_' + $index()}, value: ChoiceLetter, event: {change: flagChoicesAsEdited}"/></td>
+            <td>
+                <div class="checkbox">
+                    <input type="checkbox" data-bind="attr: {'ChoiceId': 'IsSelected_' + $index()},  checked:IsSelected"/>
+                </div>
+            </td>
+            <td class="form-group"><button class="btn btn-danger btn-xs" data-bind="click: $parent.deleteChoiceItem">Delete</button></td>
+        </tr>
         </tbody>
 
     </table>

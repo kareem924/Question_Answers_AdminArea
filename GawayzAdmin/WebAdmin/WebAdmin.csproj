@@ -222,6 +222,7 @@
     <Compile Include="ViewModels\HandleModelStateExceptionAttribute.cs" />
     <Compile Include="ViewModels\Helpers.cs" />
     <Compile Include="ViewModels\ModelStateException.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\QuestionsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -332,10 +333,14 @@
     <Content Include="Views\Company\_CreateCompany.cshtml" />
     <Content Include="Views\Company\_CreateOrUpdate.cshtml" />
     <Content Include="Views\Company\_EditCompany.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\_ProductList.cshtml" />
+    <Content Include="Views\Product\_CreateProduct.cshtml" />
+    <Content Include="Views\Product\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Product\_EditProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

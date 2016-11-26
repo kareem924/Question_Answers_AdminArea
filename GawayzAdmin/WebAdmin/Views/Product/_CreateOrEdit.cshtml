@@ -1,0 +1,58 @@
+﻿@model WebAdmin.ViewModels.ProductViewModel
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="form-group">
+            <label for="ProductName" class="col-sm-4 control-label">Product Name</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(x => x.ProductName, new { @class = "form-control", placeholder = "Company Name" })
+                @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label for="EnProductDescription" class="col-sm-4 control-label">Product English Description</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(x => x.EnProductDescription, new { @class = "form-control" })
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ArProductDescription" class="col-sm-4 control-label">Product Arabic Description</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(x => x.ArProductDescription, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ProductOrder" class="col-sm-4 control-label">Product Order</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(x => x.ProductOrder, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="ProductQPerPage" class="col-sm-4 control-label">Product Quntity Per Page</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(x => x.ProductQPerPage, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ProductSurveyQPerPage" class="col-sm-4 control-label">Product Survery Quntity Per Page</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(x => x.ProductSurveyQPerPage, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(x => x.Active) Active
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

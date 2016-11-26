@@ -51,7 +51,7 @@ namespace WebAdmin.ViewModels
                 AnswerLetter = questionsViewModel.AnswerLetter,
                 ObjectState = questionsViewModel.ObjectState,
 
-                ProductID = 2,
+                ProductID = questionsViewModel.ProductId,
                 QuestionText = questionsViewModel.QuestionText,
                 GroupNo = questionsViewModel.GroupNo,
                 QuestionTypeID = questionsViewModel.QuestionTypeId
@@ -96,7 +96,6 @@ namespace WebAdmin.ViewModels
                 company.ModifiedDate = DateTime.Today;
             return company;
         }
-
         public static CompanyViewModel CreateCompanyviewmodelFromCompanies(Companies company)
         {
             var companyViewModel =new CompanyViewModel();
@@ -105,6 +104,44 @@ namespace WebAdmin.ViewModels
             companyViewModel.CompanyName = company.CompanyName;
             companyViewModel.CompanyProfile = company.CompanyProfile;
             return companyViewModel;
+        }
+
+        public static Products CreateProductFromProductViewModel(ProductViewModel productViewModel)
+        {
+            var products = new Products
+            {
+                ProductID = productViewModel.ProductId,
+                CompanyID = productViewModel.CompanyIdKey,
+                EnterdDate = DateTime.Now,
+                ModifiedDate = DateTime.Now,
+                ProductName = productViewModel.ProductName,
+                ProductImage = productViewModel.ProductImage,
+                ProductOrder = productViewModel.ProductOrder,
+                ProductSurveyQPerPage = productViewModel.ProductSurveyQPerPage,
+                enProductDescription = productViewModel.EnProductDescription,
+                arProductDescription = productViewModel.ArProductDescription,
+                Active = productViewModel.Active
+            };
+            return products;
+        }
+
+        public static ProductViewModel CreateProductViewModelFromProducts(Products product)
+        {
+            var productViewModel = new ProductViewModel
+            {
+                ProductId = product.ProductID,
+                CompanyIdKey = product.CompanyID,
+                EnterdDate = product.EnterdDate,
+                ModifiedDate = product.ModifiedDate,
+                ProductName = product.ProductName,
+                ProductImage = product.ProductImage,
+                ProductOrder = product.ProductOrder,
+                ProductSurveyQPerPage = product.ProductSurveyQPerPage,
+                EnProductDescription = product.enProductDescription,
+                ArProductDescription = product.arProductDescription,
+                Active = product.Active
+            };
+            return productViewModel;
         }
     }
 }

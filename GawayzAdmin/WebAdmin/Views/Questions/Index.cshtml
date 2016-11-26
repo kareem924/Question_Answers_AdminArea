@@ -4,6 +4,6 @@
 }
 
 <p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+    @Html.ActionLink("Create New", "Create",new { productId =(int)ViewBag.productId }, new { @class = "btn btn-success" })
 </p>
-@{Html.RenderAction("QuestionsList");}
+@{Html.RenderAction("QuestionsList", new { productId = (int)ViewBag.productId });}

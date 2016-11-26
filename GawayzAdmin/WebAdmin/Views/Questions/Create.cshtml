@@ -8,7 +8,7 @@
 
 @section scripts{
 
-    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script src="~/Scripts/knockout-3.4.0.js" ></script>
     <script src="~/Scripts/knockout.mapping-latest.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery-validate.bootstrap-tooltip.js"></script>
@@ -17,15 +17,9 @@
         var QuestionViewModel = new QuestionViewModel(@Html.Raw(data));
         ko.applyBindings(QuestionViewModel);
     </script>
-    <script>
-        
-        var $checks = $('input[type="checkbox"]');
-        $checks.click(function () {
-          
-            $checks.not(this).prop("checked", false);
-        });
-    </script>
+
 }
+
 @{ Html.RenderPartial("_CreateOrEdit");}
 
 
