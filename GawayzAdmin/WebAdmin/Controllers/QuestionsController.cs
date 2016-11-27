@@ -150,7 +150,7 @@ namespace WebAdmin.Controllers
                 throw new ModelStateException(ex);
             }
 
-            return Json(new { newLocation = "/Questions/Index/" });
+            return Json(new { newLocation = Url.Action("Index", "Questions", new { productId =questionsViewModel.ProductId}) });
 
 
         }

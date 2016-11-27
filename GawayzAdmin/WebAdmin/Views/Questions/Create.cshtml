@@ -8,11 +8,7 @@
 
 @section scripts{
 
-    <script src="~/Scripts/knockout-3.4.0.js" ></script>
-    <script src="~/Scripts/knockout.mapping-latest.js"></script>
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery-validate.bootstrap-tooltip.js"></script>
-    <script src="~/Scripts/QuestionViewModel.js"></script>
+
     <script type="text/javascript">
         var QuestionViewModel = new QuestionViewModel(@Html.Raw(data));
         ko.applyBindings(QuestionViewModel);
