@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DataAccess.Entities
 {
     [Table("Choices")]
-    public class Choices
+    public class Choices : IObjectWithState
     {
         [Key]
         public int ChoiceID { get; set; }
@@ -19,7 +19,9 @@ namespace DataAccess.Entities
         public string ChoiceLetter { get; set; }
         public string ChoiceText { get; set; }
         public Questions Questions { get; set; }
-       
+      
+        public byte[] RowVersion { get; set; }
+
         [NotMapped]
         public ObjectState ObjectState { get; set; }
     }

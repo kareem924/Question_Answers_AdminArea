@@ -4,7 +4,7 @@ using DataAccess;
 
 namespace WebAdmin.ViewModels
 {
-    public sealed class QuestionsViewModel
+    public sealed class QuestionsViewModel : IObjectWithState
     {
         public QuestionsViewModel()
         {
@@ -18,7 +18,8 @@ namespace WebAdmin.ViewModels
      
         public string AnswerLetter { get; set; }
         public int AnswerId { get; set; }
-
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
         public int QuestionNo { get; set; }
         [Required(ErrorMessage = "Question Text is required")]
         public string QuestionText { get; set; }

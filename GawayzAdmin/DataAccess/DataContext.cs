@@ -8,7 +8,7 @@ using DataAccess.Entities;
 
 namespace DataAccess
 {
-    class DataContext : DbContext
+    public class DataContext : DbContext
     {
         public DataContext() : base("DefaultConnection")
         {
@@ -21,6 +21,7 @@ namespace DataAccess
         {
             modelBuilder.Entity<Questions>().Ignore(t => t.ObjectState);
             modelBuilder.Entity<Choices>().Ignore(t => t.ObjectState);
+           
             base.OnModelCreating(modelBuilder);
         }
 

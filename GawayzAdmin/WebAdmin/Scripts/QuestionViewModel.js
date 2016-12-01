@@ -29,7 +29,7 @@ ChoicesViewModel = function (data) {
     var self = this;
     ko.mapping.fromJS(data, ChoicesMapping, self);
     self.flagChoicesAsEdited = function () {
-        if (self.ObjectState() != ObjectState.Added) {
+        if (self.ObjectState() !== ObjectState.Added) {
             self.ObjectState(ObjectState.Modified);
         }
 
@@ -47,7 +47,7 @@ QuestionViewModel = function (data) {
         $.ajax({
             url: "/Questions/Save/",
             type: "POST",
-            data: ko.toJSON(self),
+            data: ko.toJSON(self, dataConverter),
             contentType: "application/json",
             success: function (data) {
                 if (data.QuestionViewModel != null)
@@ -55,6 +55,14 @@ QuestionViewModel = function (data) {
 
                 if (data.newLocation != null)
                     window.location = data.newLocation;
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                if (XMLHttpRequest.status == 400) {
+                    $('#MessageToClient').text(XMLHttpRequest.responseText);
+                }
+                else {
+                    $('#MessageToClient').text('The web server had an error.');
+                }
             }
         });
     },
@@ -71,10 +79,11 @@ QuestionViewModel = function (data) {
     self.addChoice = function () {
         var choiceItem = new ChoicesViewModel({ ChoiceId: 0, ChoiceText: "", ChoiceLetter: "", IsSelected: false, ObjectState: ObjectState.Added });
         self.ChoicesItems.push(choiceItem);
-    }, self.deleteChoiceItem = function (choice) {
+    },
+    self.deleteChoiceItem = function (choice) {
         self.ChoicesItems.remove(this);
 
-        if (choice.ChoiceId() > 0 && self.ChoicesToDelete.indexOf(choice.ChoiceId()) == -1)
+        if (choice.ChoiceId() > 0 && self.ChoicesToDelete.indexOf(choice.ChoiceId()) === -1)
             self.ChoicesToDelete.push(choice.ChoiceId());
     };
 };

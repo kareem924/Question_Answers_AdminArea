@@ -37,7 +37,7 @@
                     }
 
                 </table>
-                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfQuestion, page => Url.Action("QuestionsList", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "questionTable" }))
+                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfQuestion, page => Url.Action("QuestionsList", new { page, productId= ViewBag.ProductId }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "questionTable" }))
             </div>
         </div>
     </div>

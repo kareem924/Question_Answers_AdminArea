@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DataAccess.Entities
 {
     [Table("Questions")]
-    public class Questions
+    public class Questions : IObjectWithState
     {
         public Questions()
         {
@@ -25,7 +25,9 @@ namespace DataAccess.Entities
         public string QuestionText { get; set; }
         public int GroupNo { get; set; }
         public virtual List<Choices> Choices { get; set; }
-       
+      
+        public byte[] RowVersion { get; set; }
+
         [NotMapped]
         public ObjectState ObjectState { get; set; }
     }

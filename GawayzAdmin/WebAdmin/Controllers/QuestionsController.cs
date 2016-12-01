@@ -14,11 +14,10 @@ namespace WebAdmin.Controllers
 {
     public class QuestionsController : Controller
     {
-        IUnitOfWork _uow;
-  
+        private DataContext _uow;
         public QuestionsController()
         {
-            _uow = new UnitOfWork();
+            _uow = new DataContext();
         }
         // GET: Questions
         public ActionResult Index(int productId)
@@ -27,12 +26,13 @@ namespace WebAdmin.Controllers
             return View();
         }
 
-        public PartialViewResult QuestionsList(int? page,int productId)
+        public PartialViewResult QuestionsList(int? page, int productId)
         {
-            var questuinList = _uow.Questions.List().Where(x=>x.ProductID==productId).OrderBy(x => x.QuestionID);
+            var questuinList = _uow.Questions.ToList().Where(x => x.ProductID == productId && x.QuestionTypeID==2).OrderBy(x => x.QuestionID);
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             var onePageOfQuestion = questuinList.ToPagedList(pageNumber, pageSize);
+            ViewBag.ProductId = productId;
             ViewBag.OnePageOfQuestion = onePageOfQuestion;
             return PartialView("_QuestionsList");
         }
@@ -58,6 +58,7 @@ namespace WebAdmin.Controllers
             var salesOrderViewModel = new QuestionsViewModel();
             salesOrderViewModel.ObjectState = ObjectState.Added;
             salesOrderViewModel.ProductId = productId;
+            salesOrderViewModel.QuestionTypeId = 2;
             return View(salesOrderViewModel);
         }
 
@@ -109,48 +110,49 @@ namespace WebAdmin.Controllers
             }
 
             var question = ViewModels.Helpers.CreateQuestionsFromQuestionsViewModel(questionsViewModel);
-            if (question.ObjectState == ObjectState.Added)
-            { _uow.Questions.Add(question); }
-            else
-            {
-                _uow.Questions.Edit(question.QuestionID, question);
-            }
-            if (question.ObjectState == ObjectState.Deleted)
-            {
-                foreach (var choiceItem in questionsViewModel.ChoicesItems)
+        
+             _uow.Questions.Attach(question); 
+          
+
+
+                if (question.ObjectState == ObjectState.Deleted)
                 {
-                    var choice = _uow.Choices.Find(choiceItem.ChoiceId);
-                    if (choice != null)
-                        choice.ObjectState = ObjectState.Deleted;
+                    foreach (var choiceItem in questionsViewModel.ChoicesItems)
+                    {
+                        var choice = _uow.Choices.Find(choiceItem.ChoiceId);
+                        if (choice != null)
+                            choice.ObjectState = ObjectState.Deleted;
+                       
+                    }
                 }
-            }
-            else
-            {
-                foreach (int choiceId in questionsViewModel.ChoicesToDelete)
+                else
                 {
-                    var choice = _uow.Choices.Find(choiceId);
-                    if (choice != null)
-                        choice.ObjectState = ObjectState.Deleted;
+                    foreach (int choiceId in questionsViewModel.ChoicesToDelete)
+                    {
+                        var choice = _uow.Choices.Find(choiceId);
+                        if (choice != null)
+                            choice.ObjectState = ObjectState.Deleted;
+                        
+                    }
+
                 }
-            }
+
+            _uow.ApplyStateChanges();
 
 
             string messageToClient = string.Empty;
 
             try
             {
-                _uow.Save();
+                _uow.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                messageToClient = "Someone else have modified this sales order since you retrieved it.  Your changes have not been applied.  What you see now are the current values in the database.";
-            }
+           
             catch (Exception ex)
             {
                 throw new ModelStateException(ex);
             }
 
-            return Json(new { newLocation = Url.Action("Index", "Questions", new { productId =questionsViewModel.ProductId}) });
+            return Json(new { newLocation = Url.Action("Index", "Questions", new { productId = questionsViewModel.ProductId }) });
 
 
         }

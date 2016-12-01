@@ -1,7 +1,7 @@
 ﻿<div>
     <div class="row">
         <div class="col-lg-6">
-
+           
             <label class="control-label" for="QuestionText">Question Text:</label>
             <span class="form-control" data-bind="text: QuestionText"></span>
         </div>
@@ -33,4 +33,4 @@
 
 </div>
 
-<p><a class="btn btn-default btn-sm" href="/">&laquo; Back to List</a></p>
+<p><a class="btn btn-default btn-sm" data-bind="attr: { 'href': '/Questions?productId=' + ProductId() }">&laquo; Back to List</a></p>
