@@ -21,8 +21,8 @@ namespace WebAdmin.ViewModels
         public string ChoiceText { get; set; }
         public bool IsSelected { get; set; }
         public QuestionsViewModel Questions { get; set; }
-      
-        public byte[] RowVersion { get; set; }
+       
+     
         public ObjectState ObjectState { get; set; }
     }
 }

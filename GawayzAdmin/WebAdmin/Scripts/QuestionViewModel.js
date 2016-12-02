@@ -47,21 +47,79 @@ QuestionViewModel = function (data) {
         $.ajax({
             url: "/Questions/Save/",
             type: "POST",
-            data: ko.toJSON(self, dataConverter),
+            data: ko.toJSON(self),
             contentType: "application/json",
             success: function (data) {
-                if (data.QuestionViewModel != null)
-                    ko.mapping.fromJS(data.QuestionViewModel, {}, self);
+                if (data.success) {
+                   
+                    if (data.QuestionViewModel != null)
+                        ko.mapping.fromJS(data.QuestionViewModel, {}, self);
 
-                if (data.newLocation != null)
-                    window.location = data.newLocation;
+                    if (data.newLocation != null)
+                        window.location = data.newLocation;
+                } else {
+                    $.notify({
+                        // options
+                        icon: 'glyphicon glyphicon-warning',
+                        title: '',
+                        message: data.message
+                    }, {
+                        type: "danger",
+
+                        placement: {
+                            from: "bottom ",
+                            align: "right"
+                        }
+                    });
+                }
             },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            error: function (XMLHttpRequest,data, textStatus, errorThrown) {
                 if (XMLHttpRequest.status == 400) {
-                    $('#MessageToClient').text(XMLHttpRequest.responseText);
+                 
+                    $.notify({
+                        // options
+                        icon: 'glyphicon glyphicon-warning',
+                        title: '',
+                        message: XMLHttpRequest.responseText
+                    }, {
+                        type: "danger",
+
+                        placement: {
+                            from: "bottom ",
+                            align: "right"
+                        }
+                    });
+                }
+                else if (data.message) {
+                    $.notify({
+                        // options
+                        icon: 'glyphicon glyphicon-warning',
+                        title: '',
+                        message: data.message
+                    }, {
+                        type: "danger",
+
+                        placement: {
+                            from: "bottom ",
+                            align: "right"
+                        }
+                    });
                 }
                 else {
-                    $('#MessageToClient').text('The web server had an error.');
+                   
+                    $.notify({
+                        // options
+                        icon: 'glyphicon glyphicon-warning',
+                        title: '',
+                        message: 'The web server had an error.'
+                    }, {
+                        type: "danger",
+
+                        placement: {
+                            from: "bottom ",
+                            align: "right"
+                        }
+                    });
                 }
             }
         });

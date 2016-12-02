@@ -209,6 +209,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
+    <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -224,6 +225,7 @@
     <Compile Include="ViewModels\ModelStateException.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\QuestionsViewModel.cs" />
+    <Compile Include="ViewModels\SurveyViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -338,6 +340,12 @@
     <Content Include="Views\Product\_CreateProduct.cshtml" />
     <Content Include="Views\Product\_CreateOrEdit.cshtml" />
     <Content Include="Views\Product\_EditProduct.cshtml" />
+    <Content Include="Views\Survey\Index.cshtml" />
+    <Content Include="Views\Survey\_SurveyList.cshtml" />
+    <Content Include="Views\Survey\_CreateSurvey.cshtml" />
+    <Content Include="Views\Survey\_EditSurvey.cshtml" />
+    <Content Include="Views\Survey\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Survey\_DeleteSurvey.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

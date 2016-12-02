@@ -18,8 +18,7 @@ namespace WebAdmin.ViewModels
      
         public string AnswerLetter { get; set; }
         public int AnswerId { get; set; }
-        [Timestamp]
-        public byte[] RowVersion { get; set; }
+       
         public int QuestionNo { get; set; }
         [Required(ErrorMessage = "Question Text is required")]
         public string QuestionText { get; set; }
@@ -28,7 +27,7 @@ namespace WebAdmin.ViewModels
         public List<int> ChoicesToDelete { get; set; }
         public List<ChoicesViewModel> ChoicesItems { get; set; }
 
-    
+        public ChoicesViewModel Choice { get; set; }
         public string MessageToClient { get; set; }
         public ObjectState ObjectState { get; set; }
     }

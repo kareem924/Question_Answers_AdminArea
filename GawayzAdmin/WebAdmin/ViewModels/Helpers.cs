@@ -17,11 +17,12 @@ namespace WebAdmin.ViewModels
                 AnswerId = questions.AnswerID,
                 AnswerLetter = questions.AnswerLetter,
                 ObjectState = ObjectState.Unchanged,
-                RowVersion = questions.RowVersion,
+              
                 ProductId = questions.ProductID,
                 QuestionText = questions.QuestionText,
                 GroupNo = questions.GroupNo,
                 QuestionTypeId = questions.QuestionTypeID
+               
             };
             foreach (Choices choice in questions.Choices)
             {
@@ -32,13 +33,14 @@ namespace WebAdmin.ViewModels
                     ChoiceTypeId = choice.ChoiceTypeID,
                     ProductId = choice.ProductID,
                     ObjectState = ObjectState.Unchanged,
-                    RowVersion = choice.RowVersion,
+                   
                     ChoiceLetter = choice.ChoiceLetter,
-                    ChoiceText = choice.ChoiceText
+                    ChoiceText = choice.ChoiceText,
+                    IsSelected = choice.IsCorrect
                 };
                 questionsViewModel.ChoicesItems.Add(choicesViewModel);
             }
-
+           
             return questionsViewModel;
         }
 
@@ -50,11 +52,12 @@ namespace WebAdmin.ViewModels
                 AnswerID = questionsViewModel.AnswerId,
                 AnswerLetter = questionsViewModel.AnswerLetter,
                 ObjectState = questionsViewModel.ObjectState,
-                RowVersion = questionsViewModel.RowVersion,
+               
                 ProductID = questionsViewModel.ProductId,
                 QuestionText = questionsViewModel.QuestionText,
                 GroupNo = questionsViewModel.GroupNo,
-                QuestionTypeID = questionsViewModel.QuestionTypeId
+                QuestionTypeID = questionsViewModel.QuestionTypeId,
+                CreatedAt = DateTime.Now
 
             };
             int temporarySalesOrderItemId = -1;
@@ -69,7 +72,9 @@ namespace WebAdmin.ViewModels
                 choices.ChoiceLetter = choiceViewModel.ChoiceLetter;
                 choices.ChoiceText = choiceViewModel.ChoiceText;
                 choices.ObjectState = choiceViewModel.ObjectState;
-                choices.RowVersion = choiceViewModel.RowVersion;
+               
+                choices.IsCorrect = choiceViewModel.IsSelected;
+                choices.CreatedAt = DateTime.Now;
                 if (choiceViewModel.ObjectState != ObjectState.Added)
                     choices.ChoiceID = choiceViewModel.ChoiceId;
                 else
@@ -79,8 +84,36 @@ namespace WebAdmin.ViewModels
                 }
                 questions.Choices.Add(choices);
             }
-
+          
+           
             return questions;
+        }
+
+        public static ProductsSurveyQuestions CreateSurveyFromSurveyViewModel(SurveyViewModel surveyViewModel)
+        {
+            var survey = new ProductsSurveyQuestions
+            {
+                SurveyQuestionID = surveyViewModel.SurveyQuestionId,
+                ProductID = surveyViewModel.ProductId,
+                GroupNo = surveyViewModel.GroupNo,
+                SurveyQuestionNo = surveyViewModel.SurveyQuestionNo,
+                SurveyQuestionText = surveyViewModel.SurveyQuestionText
+            };
+            return survey;
+        }
+
+        public static SurveyViewModel CreateSurveyViewModelFromSurvey(ProductsSurveyQuestions survey)
+        {
+            var questionViewModel = new SurveyViewModel
+            {
+                SurveyQuestionId = survey.SurveyQuestionID,
+                ProductId = survey.ProductID,
+                GroupNo = survey.GroupNo,
+                SurveyQuestionNo = survey.SurveyQuestionNo,
+                SurveyQuestionText = survey.SurveyQuestionText
+            };
+
+            return questionViewModel;
         }
 
         public static Companies CreateCompanyFromCompanyViewModel(CompanyViewModel companyViewModel)

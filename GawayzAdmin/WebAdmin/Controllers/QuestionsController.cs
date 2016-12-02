@@ -20,19 +20,21 @@ namespace WebAdmin.Controllers
             _uow = new DataContext();
         }
         // GET: Questions
-        public ActionResult Index(int productId)
+        public ActionResult Index(int productId, int questionTypeId)
         {
             ViewBag.productId = productId;
+            ViewBag.QuestionTypeId = questionTypeId;
             return View();
         }
 
-        public PartialViewResult QuestionsList(int? page, int productId)
+        public PartialViewResult QuestionsList(int? page, int productId, int questionTypeId)
         {
-            var questuinList = _uow.Questions.ToList().Where(x => x.ProductID == productId && x.QuestionTypeID==2).OrderBy(x => x.QuestionID);
+            var questuinList = _uow.Questions.ToList().Where(x => x.ProductID == productId && x.QuestionTypeID == questionTypeId).OrderBy(x => x.QuestionID);
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             var onePageOfQuestion = questuinList.ToPagedList(pageNumber, pageSize);
             ViewBag.ProductId = productId;
+            ViewBag.questionTypeId = questionTypeId;
             ViewBag.OnePageOfQuestion = onePageOfQuestion;
             return PartialView("_QuestionsList");
         }
@@ -53,12 +55,12 @@ namespace WebAdmin.Controllers
         }
 
 
-        public ActionResult Create(int productId)
+        public ActionResult Create(int productId, int questionTypeId)
         {
             var salesOrderViewModel = new QuestionsViewModel();
             salesOrderViewModel.ObjectState = ObjectState.Added;
             salesOrderViewModel.ProductId = productId;
-            salesOrderViewModel.QuestionTypeId = 2;
+            salesOrderViewModel.QuestionTypeId = questionTypeId;
             return View(salesOrderViewModel);
         }
 
@@ -108,34 +110,38 @@ namespace WebAdmin.Controllers
             {
                 throw new ModelStateException(ModelState);
             }
+            if (questionsViewModel.ChoicesItems.Count(x => x.IsSelected) != 1)
+            {
 
+                return Json(new { success = false, message = "You Must choose ONLY ONE correct choice" });
+            }
             var question = ViewModels.Helpers.CreateQuestionsFromQuestionsViewModel(questionsViewModel);
-        
-             _uow.Questions.Attach(question); 
-          
+
+            _uow.Questions.Attach(question);
 
 
-                if (question.ObjectState == ObjectState.Deleted)
+
+            if (question.ObjectState == ObjectState.Deleted)
+            {
+                foreach (var choiceItem in questionsViewModel.ChoicesItems)
                 {
-                    foreach (var choiceItem in questionsViewModel.ChoicesItems)
-                    {
-                        var choice = _uow.Choices.Find(choiceItem.ChoiceId);
-                        if (choice != null)
-                            choice.ObjectState = ObjectState.Deleted;
-                       
-                    }
-                }
-                else
-                {
-                    foreach (int choiceId in questionsViewModel.ChoicesToDelete)
-                    {
-                        var choice = _uow.Choices.Find(choiceId);
-                        if (choice != null)
-                            choice.ObjectState = ObjectState.Deleted;
-                        
-                    }
+                    var choice = _uow.Choices.Find(choiceItem.ChoiceId);
+                    if (choice != null)
+                        choice.ObjectState = ObjectState.Deleted;
 
                 }
+            }
+            else
+            {
+                foreach (int choiceId in questionsViewModel.ChoicesToDelete)
+                {
+                    var choice = _uow.Choices.Find(choiceId);
+                    if (choice != null)
+                        choice.ObjectState = ObjectState.Deleted;
+
+                }
+
+            }
 
             _uow.ApplyStateChanges();
 
@@ -146,13 +152,31 @@ namespace WebAdmin.Controllers
             {
                 _uow.SaveChanges();
             }
-           
+
             catch (Exception ex)
             {
-                throw new ModelStateException(ex);
+                return Json(new { success = false, message = ex });
             }
+            var firstOrDefault = question.Choices.FirstOrDefault(x => x.IsCorrect);
+            if (firstOrDefault != null)
+            {
+                question.AnswerID = firstOrDefault.ChoiceID;
+                try
+                {
+                    _uow.SaveChanges();
+                }
+                catch (Exception ex)
+                {
 
-            return Json(new { newLocation = Url.Action("Index", "Questions", new { productId = questionsViewModel.ProductId }) });
+                    return Json(new { success = false, message = ex });
+                }
+            }
+               
+           
+
+
+
+            return Json(new { success = true, newLocation = Url.Action("Index", "Questions", new { productId = questionsViewModel.ProductId, questionTypeId = questionsViewModel.QuestionTypeId }) });
 
 
         }

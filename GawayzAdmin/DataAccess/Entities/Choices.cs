@@ -19,9 +19,9 @@ namespace DataAccess.Entities
         public string ChoiceLetter { get; set; }
         public string ChoiceText { get; set; }
         public Questions Questions { get; set; }
-      
-        public byte[] RowVersion { get; set; }
-
+        public bool IsCorrect { get; set; }
+        
+        public DateTime? CreatedAt { get; set; }
         [NotMapped]
         public ObjectState ObjectState { get; set; }
     }

@@ -2,7 +2,8 @@
 
 <form>
     <input type="hidden" name="ProductId" data-bind="value: ProductId"/>
-    <input type="hidden" name="QuestionId" data-bind="value: QuestionId" />
+    <input type="hidden" name="QuestionId" data-bind="value: QuestionId"/>
+    <input type="hidden" name="QuestionTypeId" data-bind="value: QuestionTypeId" />
     <div class="row">
         <div class="col-lg-6">
 
@@ -31,7 +32,7 @@
             <td class="form-group"><input name="ChoiceLetter" class="form-control input-sm text-right" data-bind="attr: {'ChoiceId': 'ChoiceLetter_' + $index()}, value: ChoiceLetter, event: {change: flagChoicesAsEdited}"/></td>
             <td>
                 <div class="checkbox">
-                    <input type="checkbox" data-bind="attr: {'ChoiceId': 'IsSelected_' + $index()},  checked:IsSelected"/>
+                    <input type="checkbox" data-bind="attr: {'ChoiceId': 'IsSelected_' + $index()},  checked:IsSelected, event: {change: flagChoicesAsEdited}"/>
                 </div>
             </td>
             <td class="form-group"><button class="btn btn-danger btn-xs" data-bind="click: $parent.deleteChoiceItem">Delete</button></td>
@@ -41,7 +42,7 @@
     </table>
 
     <p>
-        <a class="btn btn-default btn-sm" data-bind="attr: { 'href': '/Questions?productId=' + ProductId() }">&laquo; Back to List</a>
+        <a class="btn btn-default btn-sm" data-bind="attr: { 'href': '/Questions?productId=' + ProductId() + '&questionTypeId='+QuestionTypeId()}">&laquo; Back to List</a>
     </p>
 
     <p>
