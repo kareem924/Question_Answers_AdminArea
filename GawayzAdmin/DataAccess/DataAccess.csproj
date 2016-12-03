@@ -55,6 +55,7 @@
     <Compile Include="Entities\Products.cs" />
     <Compile Include="Entities\ProductsSurveyQuestions.cs" />
     <Compile Include="Entities\Questions.cs" />
+    <Compile Include="Entities\Users.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Repositories\EfGenericRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />

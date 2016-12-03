@@ -79,7 +79,18 @@ namespace DataAccess.UnitOfWork
                 return _productsSurveyQuestions;
             }
         }
-
+        private IGenericRepository<Users> _users;
+        public IGenericRepository<Users> Users
+        {
+            get
+            {
+                if (_users == null)
+                {
+                    return new EfGenericRepository<Users>(_context);
+                }
+                return _users;
+            }
+        }
         public void Save()
         {
             _context.SaveChanges();
