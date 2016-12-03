@@ -1,0 +1,22 @@
+﻿@model GawayzAdmin.ViewModels.QuestionsViewModel
+@using System.Web.Script.Serialization
+@{
+    ViewBag.Title = "Create Question";
+}
+
+@{ string data = new JavaScriptSerializer().Serialize(Model);}
+
+@section scripts{
+
+
+    <script type="text/javascript">
+        var QuestionViewModel = new QuestionViewModel(@Html.Raw(data));
+        ko.applyBindings(QuestionViewModel);
+    </script>
+
+}
+
+@{ Html.RenderPartial("_CreateOrEdit");}
+
+
+

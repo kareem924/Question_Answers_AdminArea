@@ -1,0 +1,20 @@
+﻿
+@model GawayzAdmin.ViewModels.SurveyViewModel
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">Update Survey Question</h4>
+</div>
+@using (Html.BeginForm("Edit", "Survey", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(x => x.ProductId)
+    @Html.HiddenFor(x => x.SurveyQuestionId)
+
+    <div class="modal-body">
+        @Html.Partial("_CreateOrEdit", Model)
+    </div>
+    <div class="modal-footer">
+        <button class="btn" type="button" data-dismiss="modal">Cancel</button>
+        <input class="btn btn-primary" type="submit" value="Save" />
+    </div>
+}
+

@@ -1,0 +1,116 @@
+﻿
+@{
+    Layout = null;
+}
+
+@if (User.Identity.IsAuthenticated == true)
+{
+    Response.Redirect("~/Company/Index");
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/LoginSite.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap-notify.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container" id="log-in-form">
+        <div class="heading">
+            <h1>Log In Your Account</h1>
+        </div>
+        <form id="loginForm">
+            <div class="form-group">
+                <input type="text" class="form-control" id="UserName" name="UserName" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="PassWord" name="PassWord" placeholder="Enter password">
+            </div>
+            <div class="form-group form-group-btn">
+                <button type="button" id="btnLogin" class="btn btn-success btn-lg">Log In</button>
+            </div>
+            <div class="clearfix"></div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="RememberMe" name="RememberMe"> Remember me
+                </label>
+            </div>
+        </form>
+    </div>
+    <script>
+
+
+
+        $("#btnLogin")
+            .click(function () {
+
+                loginUser();
+            });
+
+
+
+
+        function loginUser() {
+            $.ajax({
+                url: '@Url.Action("LoginUser")',
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    UserName: $('#UserName').val(),
+                    PassWord: $('#PassWord').val(),
+                    RememberMe: $("#RememberMe").is(":checked")
+                }),
+                success: function (data) {
+
+                    if (data.success) {
+                        $.notify({
+                            // options
+                            icon: 'glyphicon glyphicon-ok',
+                            title: '',
+                            message: data.message,
+                        },
+                         {
+                             type: "success",
+
+                             placement: {
+                                 from: "bottom ",
+                                 align: "right"
+                             }
+                         });
+                        if (data.url != null)
+                            window.location = data.url;
+                    } else {
+                        $.notify({
+                            // options
+                            icon: 'glyphicon glyphicon-warning',
+                            title: '',
+                            message: data.message
+                        },
+                       {
+                           type: "danger",
+
+                           placement: {
+                               from: "bottom ",
+                               align: "right"
+                           }
+                       });
+                    }
+                },
+                error: function (result) {
+                    alert("Failed");
+                }
+
+            });
+
+        }
+    </script>
+</body>
+
+</html>

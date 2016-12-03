@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create",null, new { @class = "btn btn-success", data_modal = "" })
+</p>
+@{Html.RenderAction("UserList");}
+
