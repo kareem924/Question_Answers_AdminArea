@@ -8,8 +8,16 @@ namespace GawayzAdmin.SecurityClasses
     public class SecuredUser
     {
         public UserLogin User { get; set; }
-        public String Username => User.Username;
-        public int UserId => User.UserId;
+
+        public String Username
+        {
+            get { return User.Username; }
+        }
+
+        public int UserId
+        {
+             get { return User.UserId; }
+        }
     }
     public class UserLogin
     {
