@@ -11,6 +11,11 @@ namespace DataAccess.Entities
     [Table("Products")]
     public class Products
     {
+        public Products()
+        {
+            ProductsBusinessRules = new List<ProductsBusinessRules>();
+            ProductsCodes=new List<ProductsCodes>();
+        }
         [Key]
         public int ProductID { get; set; }
         [ForeignKey("Company")]
@@ -26,5 +31,8 @@ namespace DataAccess.Entities
         public DateTime ModifiedDate { get; set; }
         public bool Active { get; set; }
         public Companies Company { get; set; }
+        public virtual List<ProductsBusinessRules> ProductsBusinessRules { get; set; }
+        public virtual List<ProductsCodes> ProductsCodes { get; set; }
+
     }
 }

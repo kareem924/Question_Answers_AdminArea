@@ -1,0 +1,41 @@
+﻿
+@using PagedList
+@using PagedList.Mvc
+<div id="CodeTable">
+    <div class="content-box-large">
+        <div class="panel-heading">
+            <div class="panel-title"><h2>Pin Codes</h2></div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            <strong> Date</strong>
+                        </th>
+                       
+                        <th>Action</th>
+                    </tr>
+
+                    @foreach (var item in ViewBag.OnePageOfCodes)
+                    {
+                        <tr>
+                            <td>
+                                
+                                <strong> @item.CreatedAt</strong>
+                            </td>
+                           
+                            <td>
+                                @Html.ActionLink("Export To Excel", "ExportData", new { date = @item.CreatedAt.Date.ToString("MM-dd-yyyy") }, new { @class = "btn btn-info btn-xs"})
+                                @Html.ActionLink("Delete", "Delete", new { date = @item.CreatedAt.Date.ToString("MM-dd-yyyy") }, new { @class = "btn btn-danger btn-xs", data_modal = "" })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+              
+            </div>
+        </div>
+    </div>
+</div>

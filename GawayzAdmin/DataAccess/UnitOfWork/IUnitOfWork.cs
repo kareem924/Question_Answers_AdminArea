@@ -15,6 +15,9 @@ namespace DataAccess.UnitOfWork
         IGenericRepository<Products> Products { get; }
         IGenericRepository<ProductsSurveyQuestions> ProductsSurveyQuestions { get; }
         IGenericRepository<Users> Users { get; }
+        IGenericRepository<BusinessRules> BusinessRules { get; }
+        IGenericRepository<ProductsBusinessRules> ProductsBusinessRules { get; }
+        IGenericRepository<ProductsCodes> ProductsCodes { get; }
         void Save(); //Commit
 
     }

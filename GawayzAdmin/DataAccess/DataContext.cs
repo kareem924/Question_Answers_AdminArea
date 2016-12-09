@@ -19,6 +19,9 @@ namespace DataAccess
         public DbSet<Companies> Companies { get; set; }
         public DbSet<ProductsSurveyQuestions> ProductsSurveyQuestions { get; set; }
         public DbSet<Users> Users { get; set; }
+        public DbSet<ProductsBusinessRules> ProductsBusinessRules { get; set; }
+        public DbSet<BusinessRules> BusinessRules { get; set; }
+        public DbSet<ProductsCodes> ProductsCodes { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Questions>().Ignore(t => t.ObjectState);

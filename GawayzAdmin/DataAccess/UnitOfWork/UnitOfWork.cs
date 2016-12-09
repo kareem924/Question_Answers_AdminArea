@@ -91,6 +91,44 @@ namespace DataAccess.UnitOfWork
                 return _users;
             }
         }
+
+        private IGenericRepository<BusinessRules> _businessRules;
+        public IGenericRepository<BusinessRules> BusinessRules
+        {
+            get
+            {
+                if (_businessRules == null)
+                {
+                    return new EfGenericRepository<BusinessRules>(_context);
+                }
+                return _businessRules;
+            }
+        }
+        private IGenericRepository<ProductsBusinessRules> _productsBusinessRules;
+        public IGenericRepository<ProductsBusinessRules> ProductsBusinessRules
+        {
+            get
+            {
+                if (_productsBusinessRules == null)
+                {
+                    return new EfGenericRepository<ProductsBusinessRules>(_context);
+                }
+                return _productsBusinessRules;
+            }
+        }
+
+        private IGenericRepository<ProductsCodes> _productsCodes;
+        public IGenericRepository<ProductsCodes> ProductsCodes
+        {
+            get
+            {
+                if (_productsCodes == null)
+                {
+                    return new EfGenericRepository<ProductsCodes>(_context);
+                }
+                return _productsCodes;
+            }
+        }
         public void Save()
         {
             _context.SaveChanges();

@@ -152,11 +152,19 @@ namespace GawayzAdmin.ViewModels
                 ProductName = productViewModel.ProductName,
                 ProductImage = productViewModel.ProductImage,
                 ProductOrder = productViewModel.ProductOrder,
+                ProductQPerPage=productViewModel.ProductQPerPage,
                 ProductSurveyQPerPage = productViewModel.ProductSurveyQPerPage,
                 enProductDescription = productViewModel.EnProductDescription,
                 arProductDescription = productViewModel.ArProductDescription,
                 Active = productViewModel.Active
+             
             };
+            int order = 0;
+            foreach (var item in productViewModel.BusinessOrder)
+            {
+                order++;
+                products.ProductsBusinessRules.Add(new ProductsBusinessRules() {ProductID=products.ProductID,BusinessRuleID=item,BusinessRuleOrder= order });
+            }
             return products;
         }
 
@@ -171,14 +179,50 @@ namespace GawayzAdmin.ViewModels
                 ProductName = product.ProductName,
                 ProductImage = product.ProductImage,
                 ProductOrder = product.ProductOrder,
+                ProductQPerPage= product.ProductQPerPage,
                 ProductSurveyQPerPage = product.ProductSurveyQPerPage,
                 EnProductDescription = product.enProductDescription,
                 ArProductDescription = product.arProductDescription,
                 Active = product.Active
             };
+            productViewModel.BusinessOrder = new List<int>();
+            foreach (var item in product.ProductsBusinessRules)
+            {
+
+                productViewModel.BusinessOrder.Add(item.BusinessRuleID);
+            }
             return productViewModel;
         }
 
+        public static ProductsCodes CreateProductCodesFromCodesViewModel(CodeViewModel codeViewModel)
+        {
+            var productCode = new ProductsCodes
+            {
+                Code = codeViewModel.Code,
+                CodeID = codeViewModel.CodeId,
+                ProductID = codeViewModel.ProductId,
+                CodeStatus = codeViewModel.CodeStatus,
+                CodeType = codeViewModel.CodeType,
+                CreatedDate = DateTime.Now
+            };
+            return productCode;
+
+
+        }
+
+        public static CodeViewModel CreateCodeViewModelFromProductCodes(ProductsCodes productCodes)
+        {
+            var codeViewModel = new CodeViewModel
+            {
+                Code = productCodes.Code,
+                CodeId = productCodes.CodeID,
+                ProductId = productCodes.ProductID,
+                CodeStatus = productCodes.CodeStatus,
+                CodeType = productCodes.CodeType,
+                CreatedDate = productCodes.CreatedDate
+            };
+            return codeViewModel;
+        }
         public static Users CreateUsersFromUserViewModel(UsersViewModel userViewModel)
         {
             var encPass = StringCipher.Encrypt(userViewModel.ConfirmPassword,

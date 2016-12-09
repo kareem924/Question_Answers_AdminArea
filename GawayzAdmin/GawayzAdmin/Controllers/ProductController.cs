@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using DataAccess.UnitOfWork;
 using PagedList;
 using GawayzAdmin.ViewModels;
+using DataAccess.Entities;
 
 namespace GawayzAdmin.Controllers
 {
@@ -22,6 +23,11 @@ namespace GawayzAdmin.Controllers
         public ActionResult Index(int companyId)
         {
             ViewBag.companyId = companyId;
+            var business = _uow.BusinessRules.List().Select(c => new {
+                BusinessRuleID = c.BusinessRuleID,
+                BusinessRuleName = c.BusinessRuleName
+            }).ToList();
+            ViewBag.BusinessRoles = new MultiSelectList(business, "BusinessRuleID", "BusinessRuleName");
             return View();
         }
 
@@ -40,6 +46,11 @@ namespace GawayzAdmin.Controllers
         {
           
             var model = new ProductViewModel() {CompanyIdKey = companyId};
+            var business = _uow.BusinessRules.List().Select(c => new {
+                BusinessRuleID = c.BusinessRuleID,
+                BusinessRuleName = c.BusinessRuleName
+            }).ToList();
+            ViewBag.BusinessRoles = new MultiSelectList(business, "BusinessRuleID", "BusinessRuleName");
             return PartialView("_CreateProduct",model);
         }
         [HttpPost]
@@ -47,6 +58,11 @@ namespace GawayzAdmin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                var business = _uow.BusinessRules.List().Select(c => new {
+                    BusinessRuleID = c.BusinessRuleID,
+                    BusinessRuleName = c.BusinessRuleName
+                }).ToList();
+                ViewBag.BusinessRoles = new MultiSelectList(business, "BusinessRuleID", "BusinessRuleName");
                 return PartialView("_CreateProduct", model);
             }
             try
@@ -71,7 +87,11 @@ namespace GawayzAdmin.Controllers
             }
            
             var product = _uow.Products.Find(id);
-          
+            var business = _uow.BusinessRules.List().Select(c => new {
+                BusinessRuleID = c.BusinessRuleID,
+                BusinessRuleName = c.BusinessRuleName
+            }).ToList();
+            ViewBag.BusinessRoles = new MultiSelectList(business, "BusinessRuleID", "BusinessRuleName");
             return PartialView("_EditProduct", Helpers.CreateProductViewModelFromProducts(product));
         }
         [HttpPost]
@@ -79,11 +99,38 @@ namespace GawayzAdmin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                var business = _uow.BusinessRules.List().Select(c => new {
+                    BusinessRuleID = c.BusinessRuleID,
+                    BusinessRuleName = c.BusinessRuleName
+                }).ToList();
+                ViewBag.BusinessRoles = new MultiSelectList(business, "BusinessRuleID", "BusinessRuleName");
                 return PartialView("_EditProduct", model);
             }
             try
             {
-                _uow.Products.Edit(model.ProductId, Helpers.CreateProductFromProductViewModel(model));
+               var ClearBusinessRole= _uow.Products.Find(model.ProductId);
+                
+                foreach (var item in ClearBusinessRole.ProductsBusinessRules.ToList())
+                {
+                    _uow.ProductsBusinessRules.Delete(item.ProductBID);
+                }
+                ClearBusinessRole.Active = model.Active;
+                ClearBusinessRole.ProductID = model.ProductId;
+                ClearBusinessRole.CompanyID = model.CompanyIdKey;
+                ClearBusinessRole.ProductName = model.ProductName;
+                ClearBusinessRole.ProductImage = model.ProductImage;
+                ClearBusinessRole.ProductOrder = model.ProductOrder;
+                ClearBusinessRole.ProductQPerPage = model.ProductQPerPage;
+                ClearBusinessRole.ProductSurveyQPerPage = model.ProductSurveyQPerPage;
+                ClearBusinessRole.enProductDescription = model.EnProductDescription;
+                ClearBusinessRole.arProductDescription = model.ArProductDescription;
+                int order = 0;
+                foreach (var item in model.BusinessOrder)
+                {
+                    order++;
+                    ClearBusinessRole.ProductsBusinessRules.Add(new ProductsBusinessRules() { ProductID = model.ProductId, BusinessRuleID = item, BusinessRuleOrder = order });
+                }
+                _uow.Products.Edit(model.ProductId, ClearBusinessRole);
                 _uow.Save();
                 string url = Url.Action("ProductList", "Product", new { companyId = model.CompanyIdKey });
                 return Json(new { success = true, url = url, tableId = "productTable" });
@@ -93,5 +140,7 @@ namespace GawayzAdmin.Controllers
                 return Json(new { success = false, message = ex });
             }
         }
+
+     
     }
 }

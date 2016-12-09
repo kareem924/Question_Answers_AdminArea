@@ -61,3 +61,7 @@ C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\GawayzAdmin\
 C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\GawayzAdmin\bin\Newtonsoft.Json.xml
 C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\GawayzAdmin\obj\Debug\GawayzAdmin.dll
 C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\GawayzAdmin\obj\Debug\GawayzAdmin.pdb
+C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\GawayzAdmin\bin\ClosedXML.dll
+C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\GawayzAdmin\bin\DocumentFormat.OpenXml.dll
+C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\GawayzAdmin\bin\ClosedXML.pdb
+C:\Users\Kareem\Source\Repos\Question_Answers_AdminArea\GawayzAdmin\GawayzAdmin\bin\ClosedXML.xml

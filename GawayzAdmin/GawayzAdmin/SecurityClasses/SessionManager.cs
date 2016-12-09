@@ -38,12 +38,12 @@ namespace GawayzAdmin.SecurityClasses
             }
             set
             {
-                if (value == null) throw new ArgumentNullException(nameof(value));
+                if (value == null) throw new ArgumentNullException("");
                 //System.Web.HttpContext.Current.Session[USER_TICKET] = value;
             }
         }
         
-        public static Int32 SessionTimeout => HttpContext.Current.Session.Timeout;
+        public static Int32 SessionTimeout { get { return HttpContext.Current.Session.Timeout; } }
 
 
         /// <summary>

@@ -19,6 +19,7 @@ namespace GawayzAdmin.ViewModels
         public int ProductQPerPage { get; set; }
         public int ProductSurveyQPerPage { get; set; }
         public int ProductOrder { get; set; }
+        public List<int> BusinessOrder { get; set; }
         public DateTime EnterdDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public bool Active { get; set; }

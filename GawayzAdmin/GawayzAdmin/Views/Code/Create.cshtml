@@ -1,0 +1,81 @@
+﻿@model GawayzAdmin.ViewModels.CodeViewModel
+@{
+    ViewBag.Title = "Create";
+}
+<div class="row">
+
+
+    <div class="col-md-12 panel-warning">
+        <div class="content-box-header  panel-heading">
+            <div class="panel-title">Generate Pin Code</div>
+
+
+        </div>
+        <div class="content-box-large box-with-header">
+
+            @using (Html.BeginForm("Create", "Code", FormMethod.Post, new { @class = "form-inline" }))
+            {
+                @Html.HiddenFor(x=>x.ProductId)
+                <fieldset>
+                    <div class="form-group col-sm-4">
+                        <label class="control-label">Pin Code Number</label>
+                        @Html.TextBoxFor(x=>x.Size, new { @class = "form-control" })
+                    </div>
+
+
+                    <div class="checkbox col-sm-3">
+                        <label class="radio-inline">
+                            <input type="radio" name="CodeType" id="inlineRadio1" value="1" checked="checked"> One Time Use
+                        </label>
+                    </div>
+                    <div class="checkbox col-sm-3">
+                        <label class="radio-inline">
+                            <input type="radio" name="CodeType" id="inlineRadio1" value="2"> Permanent
+                        </label>
+                    </div>
+
+                    <button type="submit" value="Generate" class="btn btn-primary">
+                        Generate
+                    </button>
+                </fieldset>
+            }
+        </div>
+    </div>
+</div>
+<div class="content-box-large">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h2>Questions</h2>
+        </div>
+        <div class="panel-options">
+           
+            @Html.ActionLink("Export To Excel", "ExportData", null , new { @class = "btn btn-info btn-xs" })
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+
+            <table class="table">
+                <tr>
+                    <th>
+                        <strong> Code</strong>
+                    </th>
+
+                </tr>
+
+                @foreach (var item in ViewBag.Codes)
+                {
+                    <tr>
+                        <td>
+                            <strong> @item</strong>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
