@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext.cs" />
+    <Compile Include="Entities\Ads.cs" />
     <Compile Include="Entities\BusinessRules.cs" />
     <Compile Include="Entities\Choices.cs" />
     <Compile Include="Entities\Companies.cs" />

@@ -22,6 +22,7 @@ namespace DataAccess
         public DbSet<ProductsBusinessRules> ProductsBusinessRules { get; set; }
         public DbSet<BusinessRules> BusinessRules { get; set; }
         public DbSet<ProductsCodes> ProductsCodes { get; set; }
+        public DbSet<Ads> Ads { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Questions>().Ignore(t => t.ObjectState);

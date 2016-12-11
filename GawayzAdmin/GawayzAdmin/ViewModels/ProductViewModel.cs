@@ -24,5 +24,17 @@ namespace GawayzAdmin.ViewModels
         public DateTime ModifiedDate { get; set; }
         public bool Active { get; set; }
         public int CompanyIdKey { get; set; }
+        public bool IsSurvey
+        {
+            get { return BusinessOrder.Any(x => x == 2); }
+        }
+        public bool IsCode
+        {
+            get { return BusinessOrder.Any(x => x == 3); }
+        }
+        public bool IsBrandAwareness
+        {
+            get { return BusinessOrder.Any(x => x == 1); }
+        }
     }
 }

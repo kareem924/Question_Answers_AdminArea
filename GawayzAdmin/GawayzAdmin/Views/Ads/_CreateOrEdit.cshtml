@@ -1,0 +1,66 @@
+﻿@model GawayzAdmin.ViewModels.AdsViewModel
+
+
+        <div class="form-group">
+            <label for="Keyword" class="col-lg-4 control-label">Keyword</label>
+            <div class="col-lg-8">
+                @Html.TextBoxFor(x => x.Keyword, new { @class = "form-control", placeholder = "Keyword" })
+                @Html.ValidationMessageFor(model => model.Keyword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="AlternateText" class="col-sm-4 control-label">Alternate Text</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(x => x.AlternateText, new {@class = "form-control", placeholder = "Alternate Text"})
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="NavigateUrl" class="col-sm-4 control-label">Navigate Url</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(x => x.NavigateUrl, new {@class = "form-control", placeholder = "Navigate Url"})
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Width" class="col-sm-4 control-label">Width</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(x => x.Width, new {@class = "form-control", placeholder = "Width"})
+                @Html.ValidationMessageFor(model => model.Width, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Height" class="col-sm-4 control-label">Width</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(x => x.Height, new {@class = "form-control", placeholder = "Height"})
+                @Html.ValidationMessageFor(model => model.Height, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Impressions" class="col-sm-4 control-label">Impressions</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(x => x.Impressions, new {@class = "form-control", placeholder = "Impressions"})
+                @Html.ValidationMessageFor(model => model.Impressions, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(x => x.SideAd) Side Ad
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="File" class="col-sm-4 control-label">Image</label>
+            <div class="col-sm-4 ">
+
+                @Html.TextBoxFor(x=>x.File,new { type = "file" , data_buttonName = "btn-primary" })
+                @Html.ValidationMessageFor(model => model.File, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+
+<script>
+    $(":file").filestyle({ buttonName: "btn-primary" });
+</script>

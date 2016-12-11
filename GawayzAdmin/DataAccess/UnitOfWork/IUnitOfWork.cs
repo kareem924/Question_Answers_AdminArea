@@ -18,6 +18,7 @@ namespace DataAccess.UnitOfWork
         IGenericRepository<BusinessRules> BusinessRules { get; }
         IGenericRepository<ProductsBusinessRules> ProductsBusinessRules { get; }
         IGenericRepository<ProductsCodes> ProductsCodes { get; }
+        IGenericRepository<Ads> Ads { get; }
         void Save(); //Commit
 
     }

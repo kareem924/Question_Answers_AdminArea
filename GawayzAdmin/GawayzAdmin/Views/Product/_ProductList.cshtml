@@ -30,7 +30,7 @@
                                 @item.ProductName
                             </td>
                             <td>
-                                @item.enProductDescription
+                                @item.EnProductDescription
                             </td>
                             <td>
                                 @if (item.Active == true)
@@ -45,21 +45,32 @@
                                 }
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = @item.ProductID, companyId= ViewBag.companyId }, new { @class = "btn btn-warning btn-xs", data_modal = "" }) |
+                                @Html.ActionLink("Edit", "Edit", new { id = @item.ProductId, companyId = ViewBag.companyId }, new { @class = "btn btn-warning btn-xs", data_modal = "" }) |
 
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Action <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li>@Html.ActionLink("Questions", "Index", "Questions", new { productId = @item.ProductID, questionTypeId = 2 }, null)</li>
-                                        <li>@Html.ActionLink("Brand Awareness", "Index", "Questions", new { productId = @item.ProductID, questionTypeId=1 }, null)</li>
-                                        <li>@Html.ActionLink("Survey", "Index", "Survey", new { productId = @item.ProductID }, null)</li>
-                                        <li>@Html.ActionLink("Pin Code", "Index", "Code", new { productId = @item.ProductID }, null)</li>
+                                        <li>@Html.ActionLink("Questions", "Index", "Questions", new { productId = @item.ProductId, questionTypeId = 2 }, null)</li>
+                                        @if (item.IsBrandAwareness)
+                                        {
+                                            <li>@Html.ActionLink("Brand Awareness", "Index", "Questions", new { productId = @item.ProductId, questionTypeId = 1 }, null)</li>
+                                        }
+                                        @if (item.IsSurvey)
+                                        {
+                                            <li>@Html.ActionLink("Survey", "Index", "Survey", new { productId = @item.ProductId }, null)</li>
+                                        }
+                                        @if (item.IsCode)
+                                        {
+                                            <li>@Html.ActionLink("Pin Code", "Index", "Code", new { productId = @item.ProductId }, null)</li>
+                                        }
+
+
                                     </ul>
                                 </div>
 
-                              
+
 
                             </td>
                         </tr>
@@ -74,23 +85,23 @@
 
 <script>
     var resultVariable;
-    $(function() {
-        $.ajaxSetup({ cache: false, async:false });
+    $(function () {
+        $.ajaxSetup({ cache: false, async: false });
 
         $("a[data-modal]")
             .on("click",
-                function(e) {
+                function (e) {
                     // hide dropdown if any (this is used wehen invoking modal from link in bootstrap dropdown )
                     //$(e.target).closest('.btn-group').children('.dropdown-toggle').dropdown('toggle');
 
                     $('#myModalContent')
                         .load(this.href,
-                            function() {
+                            function () {
                                 $('#myModal')
                                     .modal({
-                                            backdrop: 'static',
-                                            keyboard: true
-                                        },
+                                        backdrop: 'static',
+                                        keyboard: true
+                                    },
                                         'show');
                                 bindForm(this);
                             });
@@ -100,20 +111,20 @@
 
     function bindForm(dialog) {
         $('form', dialog)
-            .submit(function() {
+            .submit(function () {
                 $.ajax({
 
-                        url: this.action,
-                        type: this.method,
-                        data: $(this).serialize(),
-                        async: true,
-                    })
-                    .done(function(result) {
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    async: true,
+                })
+                    .done(function (result) {
                         if (result.success) {
 
                             $('#myModal').modal('hide');
                             $('#' + result.tableId).load(result.url);
-//  Load data from the server and place the returned HTML into the matched element
+                            //  Load data from the server and place the returned HTML into the matched element
                             $.notify({
                                 // options
                                 icon: 'glyphicon glyphicon-ok',

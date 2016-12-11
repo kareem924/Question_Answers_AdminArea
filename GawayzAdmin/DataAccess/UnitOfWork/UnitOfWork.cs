@@ -129,6 +129,19 @@ namespace DataAccess.UnitOfWork
                 return _productsCodes;
             }
         }
+
+        private IGenericRepository<Ads> _ads;
+        public IGenericRepository<Ads> Ads
+        {
+            get
+            {
+                if (_ads == null)
+                {
+                    return new EfGenericRepository<Ads>(_context);
+                }
+                return _ads;
+            }
+        }
         public void Save()
         {
             _context.SaveChanges();

@@ -36,7 +36,22 @@ namespace GawayzAdmin.Controllers
             var productList = _uow.Products.List().Where(x=>x.CompanyID== companyId).OrderBy(x => x.CompanyID);
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-            var onePageOfproducts = productList.ToPagedList(pageNumber, pageSize);
+            var onePageOfproducts = productList.Select(x => new ProductViewModel()
+            {
+                ProductId = x.ProductID,
+                Active = x.Active,
+                ArProductDescription = x.arProductDescription,
+                BusinessOrder = x.ProductsBusinessRules.Select(y => y.BusinessRuleID).ToList(),
+                CompanyIdKey = x.CompanyID,
+                EnProductDescription = x.enProductDescription,
+                EnterdDate = x.EnterdDate,
+                ModifiedDate = x.ModifiedDate,
+                ProductImage = x.ProductImage,
+                ProductName = x.ProductName,
+                ProductOrder = x.ProductOrder,
+                ProductQPerPage = x.ProductQPerPage,
+                ProductSurveyQPerPage = x.ProductSurveyQPerPage
+            }).ToPagedList(pageNumber, pageSize);
             ViewBag.OnePageOfProducts = onePageOfproducts;
             ViewBag.companyId = companyId;
             return PartialView("_ProductList");

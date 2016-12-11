@@ -103,7 +103,7 @@ namespace GawayzAdmin.Controllers
                     Response.Buffer = true;
                     Response.Charset = "";
                     Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                    Response.AddHeader("content-disposition", "attachment;filename= EmployeeReport.xlsx");
+                    Response.AddHeader("content-disposition", "attachment;filename= Codes.xlsx");
                     using (var ms = new MemoryStream())
                     {
                         wb.SaveAs(ms);
@@ -136,7 +136,7 @@ namespace GawayzAdmin.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= EmployeeReport.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= Codes.xlsx");
                 using (var ms = new MemoryStream())
                 {
                     wb.SaveAs(ms);
