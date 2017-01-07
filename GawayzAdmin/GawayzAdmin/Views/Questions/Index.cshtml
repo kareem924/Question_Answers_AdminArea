@@ -1,9 +1,0 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
-
-<p>
-    @Html.ActionLink("Create New", "Create",new { productId =(int)ViewBag.productId, questionTypeId=(int)ViewBag.QuestionTypeId }, new { @class = "btn btn-success" })
-</p>
-@{Html.RenderAction("QuestionsList", new { productId = (int)ViewBag.productId, questionTypeId = (int)ViewBag.QuestionTypeId });}
